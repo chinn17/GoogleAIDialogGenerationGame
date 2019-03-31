@@ -906,6 +906,7 @@ GameObject:
   - component: {fileID: 545135013}
   - component: {fileID: 545135012}
   - component: {fileID: 545135011}
+  - component: {fileID: 545135014}
   m_Layer: 5
   m_Name: Login
   m_TagString: Untagged
@@ -973,9 +974,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 779783268}
-        m_MethodName: sceneTransition
-        m_Mode: 5
+      - m_Target: {fileID: 545135014}
+        m_MethodName: LoginUser
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1023,6 +1024,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545135009}
   m_CullTransparentMesh: 0
+--- !u!114 &545135014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545135009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698478be68c1ecf40b27f650d9e1a6db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emailInputField: {fileID: 0}
+  usernameInputField: {fileID: 570976745}
+  passwordInputField: {fileID: 1395128231}
 --- !u!1 &570976743
 GameObject:
   m_ObjectHideFlags: 0
