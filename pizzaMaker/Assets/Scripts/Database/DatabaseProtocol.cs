@@ -2,6 +2,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DatabaseProtocol : MonoBehaviour
 {
@@ -15,25 +16,33 @@ public class DatabaseProtocol : MonoBehaviour
     {
         string username = usernameInputField.text;
         string email = emailInputField.text;
-        string password = passwordInputField.text;
+        string password = (passwordInputField.text.Length > 0) ? passwordInputField.text : null;
 
-        if (AccountExists(username, email))
+        if (password != null)
         {
-            Debug.Log("Account Exists");
-            return;
+            if (AccountExists(username, email))
+            {
+                Debug.Log("Account Exists");
+                return;
+            }
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = "googleaidb";
+            if (dbCon.IsConnect())
+            {
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO `users` (username, email, password) VALUES (?username, ?email, ?password)", dbCon.Connection);
+                cmd.Parameters.AddWithValue("?username", username);
+                cmd.Parameters.AddWithValue("?email", email);
+                cmd.Parameters.AddWithValue("?password", SaltAndHash.Hash(password));
+                var reader = cmd.ExecuteReader();
+                dbCon.Close();
+                SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
+            }
         }
-        var dbCon = DBConnection.Instance();
-        dbCon.DatabaseName = "googleaidb";
-        if (dbCon.IsConnect())
+        else
         {
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO `users` (username, email, password) VALUES (?username, ?email, ?password)", dbCon.Connection);
-            cmd.Parameters.AddWithValue("?username", username);
-            cmd.Parameters.AddWithValue("?email", email);
-            cmd.Parameters.AddWithValue("?password", SaltAndHash.Hash(password));
-            var reader = cmd.ExecuteReader();
-            dbCon.Close();
-            Debug.Log("Success");
+            Debug.Log("Password can not be blank");
         }
+
     }
 
     //Return True if Account Exists
@@ -57,27 +66,35 @@ public class DatabaseProtocol : MonoBehaviour
     public void LoginUser()
     {
         string username = usernameInputField.text;
-        string password = passwordInputField.text;
-
-        var dbCon = DBConnection.Instance();
-        dbCon.DatabaseName = "googleaidb";
-        if (dbCon.IsConnect())
+        string password = (passwordInputField.text.Length > 0) ? passwordInputField.text : null;
+        if (password != null)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT `password` from `users` WHERE `username` = ?username LIMIT 1", dbCon.Connection);
-            cmd.Parameters.AddWithValue("?username", username);
-            string hashedPassword = Convert.ToString(cmd.ExecuteScalar());
-            if (SaltAndHash.Verify(password, hashedPassword))
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = "googleaidb";
+            if (dbCon.IsConnect())
             {
-                SetOnline(username);
-                Debug.Log("Success");
-            }
-            else
-            {
-                Debug.Log("Incorrect Username or Password");
-            }
+                MySqlCommand cmd = new MySqlCommand("SELECT `password` from `users` WHERE `username` = ?username LIMIT 1", dbCon.Connection);
+                cmd.Parameters.AddWithValue("?username", username);
+                string hashedPassword = Convert.ToString(cmd.ExecuteScalar());
+                if (SaltAndHash.Verify(password, hashedPassword))
+                {
+                    SetOnline(username);
+                    SceneManager.LoadScene("GameMenuScene", LoadSceneMode.Single);
+                }
+                else
+                {
+                    Debug.Log("Incorrect Username or Password");
+                }
 
+            }
+            dbCon.Close();
         }
-        dbCon.Close();
+        else
+        {
+            Debug.Log("Incorrect Username or Password");
+        }
+
+
 
         //return result;
     }
