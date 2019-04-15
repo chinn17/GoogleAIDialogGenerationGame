@@ -78,6 +78,7 @@ public class DatabaseProtocol : MonoBehaviour
                 string hashedPassword = Convert.ToString(cmd.ExecuteScalar());
                 if (SaltAndHash.Verify(password, hashedPassword))
                 {
+                    PlayerPrefs.SetString("Username", username);
                     SetOnline(username);
                     SceneManager.LoadScene("GameMenuScene", LoadSceneMode.Single);
                 }
@@ -99,7 +100,20 @@ public class DatabaseProtocol : MonoBehaviour
         //return result;
     }
 
-    public bool SetOnline(string givenUsername)
+    public void SetOnline()
+    {
+        var dbCon = DBConnection.Instance();
+        dbCon.DatabaseName = "googleaidb";
+        if (dbCon.IsConnect())
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE `users` SET `online` = 1 WHERE `username` =?username", dbCon.Connection);
+            cmd.Parameters.AddWithValue("?username", PlayerPrefs.GetString("Username"));
+            int result = Convert.ToInt16(cmd.ExecuteScalar());
+            dbCon.Close();
+        }
+    }
+
+    public void SetOnline(string givenUsername)
     {
         var dbCon = DBConnection.Instance();
         dbCon.DatabaseName = "googleaidb";
@@ -109,12 +123,9 @@ public class DatabaseProtocol : MonoBehaviour
             cmd.Parameters.AddWithValue("?username", givenUsername);
             int result = Convert.ToInt16(cmd.ExecuteScalar());
             dbCon.Close();
-            return result == 1 ? true : false;
         }
-        return false;
     }
-
-    public bool SetOffline(string givenUsername)
+    public void SetOffline(string givenUsername)
     {
         var dbCon = DBConnection.Instance();
         dbCon.DatabaseName = "googleaidb";
@@ -124,9 +135,79 @@ public class DatabaseProtocol : MonoBehaviour
             cmd.Parameters.AddWithValue("?username", givenUsername);
             int result = Convert.ToInt16(cmd.ExecuteScalar());
             dbCon.Close();
-            return result == 1 ? true : false;
         }
-        return false;
+    }
+
+    public void SetWaiting()
+    {
+        var dbCon = DBConnection.Instance();
+        dbCon.DatabaseName = "googleaidb";
+        if (dbCon.IsConnect())
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE `users` SET `online` = 2 WHERE `username` =?username", dbCon.Connection);
+            cmd.Parameters.AddWithValue("?username", PlayerPrefs.GetString("Username"));
+            int result = Convert.ToInt16(cmd.ExecuteScalar());
+            dbCon.Close();
+        }
+    }
+
+    public void SetWaiting(string givenUsername)
+    {
+        var dbCon = DBConnection.Instance();
+        dbCon.DatabaseName = "googleaidb";
+        if (dbCon.IsConnect())
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE `users` SET `online` = 2 WHERE `username` =?username", dbCon.Connection);
+            cmd.Parameters.AddWithValue("?username", givenUsername);
+            int result = Convert.ToInt16(cmd.ExecuteScalar());
+            dbCon.Close();
+        }
+    }
+    public void SetInProgress(string givenUsername)
+    {
+        var dbCon = DBConnection.Instance();
+        dbCon.DatabaseName = "googleaidb";
+        if (dbCon.IsConnect())
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE `users` SET `online` = 3 WHERE `username` =?username", dbCon.Connection);
+            cmd.Parameters.AddWithValue("?username", usernameInputField.text);
+            int result = Convert.ToInt16(cmd.ExecuteScalar());
+            dbCon.Close();
+        }
+    }
+
+    public void SetJoiningUsername()
+    {
+        string givenUsername = usernameInputField.text;
+        string loggedInUsername = PlayerPrefs.GetString("Username");
+        var dbCon = DBConnection.Instance();
+        dbCon.DatabaseName = "googleaidb";
+        if (dbCon.IsConnect())
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE `users` SET `joining_username` = ?givenUsername WHERE `username` =?loggedInUsername", dbCon.Connection);
+            cmd.Parameters.AddWithValue("?loggedInUsername", loggedInUsername);
+            cmd.Parameters.AddWithValue("?givenUsername", givenUsername);
+            int result = Convert.ToInt16(cmd.ExecuteScalar());
+            dbCon.Close();
+        }
+    }
+    //0 = Offline
+    //1 = Online
+    //2 = Game Created but waiting
+    //3 = In progress
+    private void ChangeStatus(string givenUsername, int givenStatus)
+    {
+
+        var dbCon = DBConnection.Instance();
+        dbCon.DatabaseName = "googleaidb";
+        if (dbCon.IsConnect())
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE `users` SET `online` = ?status WHERE `username` =?username", dbCon.Connection);
+            cmd.Parameters.AddWithValue("?status", givenStatus);
+            cmd.Parameters.AddWithValue("?username", givenUsername);
+            int result = Convert.ToInt16(cmd.ExecuteScalar());
+            dbCon.Close();
+        }
     }
     //Debug Stuff
     //public void PrintStuff(string printed)
