@@ -9,7 +9,7 @@ public class SaltAndHash : MonoBehaviour
     /// <summary>
     /// Size of salt.
     /// </summary>
-    private const int SaltSize = 16;
+    private const int SaltSize = 90;
 
     /// <summary>
     /// Size of hash.
