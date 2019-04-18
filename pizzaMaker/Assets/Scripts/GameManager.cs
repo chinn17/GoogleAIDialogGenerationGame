@@ -17,9 +17,9 @@ public class GameManager : MonoBehaviour
     public GameObject chatPanel, textObject;
     public TMP_InputField chatBox;
     public Color playerMessage, info;
-    public SocketListener socket;
+   // public SocketListener socket;
     public Client client;
-    public MyNetworkManager network;
+   // public MyNetworkManager network;
     public Button pay;
     [SerializeField] List<Message> messageList = new List<Message>();
     
@@ -52,14 +52,7 @@ public class GameManager : MonoBehaviour
 
         }
 
-        if (!chatBox.isFocused)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SendMessageToChat("you pressed space key"); //, Message.MessageType.info);
-                //Debug.Log("Space") ;
-            }
-        }
+       
     }
 
     public void SendMessageToChat(string text)//, Message.MessageType messageType)
@@ -97,20 +90,6 @@ public class GameManager : MonoBehaviour
         messageList.Add(newMessage);
     }
     
-    
-    Color MessageTypeColor(Message.MessageType messageType)
-    {
-        Color color = info;
-        switch (messageType)
-        {
-            case Message.MessageType.playerMessage:
-                color = playerMessage;
-                break;
-        
-        }
-        
-        return color;
-    }
 }
 [System.Serializable]
 public class Message
