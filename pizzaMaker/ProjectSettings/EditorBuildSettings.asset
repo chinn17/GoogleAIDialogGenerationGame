@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayerLostScene.unity
     guid: f1dc3054a1ee041c5b471a332419a727
+  - enabled: 1
+    path: Assets/Scenes/CustomerUI.unity
+    guid: 3dfc8305f45994fd5ac309b25730d50e
+  - enabled: 1
+    path: Assets/Scenes/PizzaMakerUI.unity
+    guid: 1592e5966cf694049ac10cd1ef532941
   m_configObjects: {}
