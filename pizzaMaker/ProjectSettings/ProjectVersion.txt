@@ -1,1 +1,13 @@
+<<<<<<< HEAD
 m_EditorVersion: 2018.3.3f1
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+m_EditorVersion: 2018.3.8f1
+=======
+m_EditorVersion: 2018.3.11f1
+>>>>>>> Stashed changes
+=======
+m_EditorVersion: 2018.3.11f1
+>>>>>>> Stashed changes
+>>>>>>> index on development: abd406d Merge pull request #9 from chinn17/timer

@@ -3,10 +3,18 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+<<<<<<< HEAD
 
 // Socket Listener acts as a server and listens to the incoming   
 // messages on the specified port and protocol.  
 public class SocketListener
+=======
+using UnityEngine;
+
+// Socket Listener acts as a server and listens to the incoming   
+// messages on the specified port and protocol.  
+public class SocketListener : MonoBehaviour
+>>>>>>> index on development: abd406d Merge pull request #9 from chinn17/timer
 {
     public static int Main(String[] args)
     {
