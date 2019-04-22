@@ -25,6 +25,8 @@ public class GameMenuSetup : MonoBehaviour
     public void SetWaitingPopup(bool givenBool)
     {
         waitingPopup.SetActive(givenBool);
+        //object reference not set to an
+        //instance of an object 
     }
 
     public void SetJoinPopup(bool givenBool)
