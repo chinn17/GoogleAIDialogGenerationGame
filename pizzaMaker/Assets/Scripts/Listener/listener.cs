@@ -5,11 +5,11 @@ using System.Net.Sockets;
 using System.Text;
 
 
-
 // Socket Listener acts as a server and listens to the incoming   
 // messages on the specified port and protocol.  
 public class SocketListener
 {
+    //var gameMenu = GameMenuSetup.Instance();
     //var dbCon = DBConnection.Instance();
 
     //var dbCon = DBConnection.Instance();
@@ -19,10 +19,7 @@ public class SocketListener
     public static int Main(String[] args)
     {
         //before starting server, make an instance of database to get character status
-        
-
         StartServer();
-
         return 0;
     }
 
@@ -36,9 +33,13 @@ public class SocketListener
         IPAddress ipAddress = host.AddressList[0];
         IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
 
-
+        //Console.WriteLine("outisde of try statement");
         try
         {
+            
+           // var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = "googleaidb";
+
 
             // Create a Socket that will use Tcp protocol      
             Socket listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -54,27 +55,26 @@ public class SocketListener
           //access database and check if two users have the same value
 
 
-            //Console.WriteLine("Waiting for a connection...");
+           Console.WriteLine("Waiting for a connection from client");
             Socket handler = listener.Accept();
 
             // Incoming data from the client. aka other player    
             string data = null;
             byte[] bytes = null;
 
-            while (true)
-            {
+
+            Console.WriteLine("entrance of true statement");
+
                 bytes = new byte[1024];
                 int bytesRec = handler.Receive(bytes);
                 data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                if (data.IndexOf("<EOF>") > -1)
-                {
-                    break;
-                }
-            }
 
+
+
+            Console.WriteLine("outisde of true statement");
             //data is the message that is sended, will need to keep track with bytesRec: which the client recieves in the client.cs file
 
-           // Console.WriteLine("Text received : {0}", data);
+            Console.WriteLine("Text received : {0}, from client", data);
 
             byte[] msg = Encoding.ASCII.GetBytes(data);
             handler.Send(msg);
