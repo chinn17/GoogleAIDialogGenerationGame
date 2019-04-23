@@ -2,19 +2,12 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-<<<<<<< HEAD
-=======
 using UnityEngine;
->>>>>>> index on development: abd406d Merge pull request #9 from chinn17/timer
 
 // Client app is the one sending messages to a Server/listener.   
 // Both listener and client can send messages back and forth once a   
 // communication is established.  
-<<<<<<< HEAD
-public class SocketClient
-=======
 public class SocketClient : MonoBehaviour
->>>>>>> index on development: abd406d Merge pull request #9 from chinn17/timer
 {
     public static int Main(String[] args)
     {

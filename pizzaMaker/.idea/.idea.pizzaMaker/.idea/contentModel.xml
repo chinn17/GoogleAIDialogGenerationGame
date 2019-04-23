@@ -11,14 +11,11 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-<<<<<<< HEAD
           <e p="buttonClick.cs" t="Include" />
           <e p="Client" t="Include">
             <e p="Program.cs" t="Include" />
           </e>
-=======
           <e p="countdown.cs" t="Include" />
->>>>>>> development
           <e p="Database" t="Include">
             <e p="DatabaseProtocol.cs" t="Include" />
             <e p="DBConnection.cs" t="Include" />
@@ -26,16 +23,12 @@
           </e>
           <e p="GameManager.cs" t="Include" />
           <e p="GameMenuSetup.cs" t="Include" />
-<<<<<<< HEAD
           <e p="Listener" t="Include">
             <e p="Program.cs" t="Include" />
           </e>
           <e p="MyNetworkManager.cs" t="Include" />
           <e p="SceneTransition.cs" t="Include" />
           <e p="SliderTransition.cs" t="Include" />
-=======
-          <e p="SceneTransition.cs" t="Include" />
->>>>>>> development
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Resources" t="Include">
