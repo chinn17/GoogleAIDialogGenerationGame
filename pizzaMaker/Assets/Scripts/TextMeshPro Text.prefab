@@ -1,6 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD
 --- !u!1 &460051301738147369
+=======
+--- !u!1 &6671270027262926194
+>>>>>>> development
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +12,15 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 460051301738147364}
   - component: {fileID: 460051301738147367}
   - component: {fileID: 460051301738147366}
+=======
+  - component: {fileID: 5959550605196924831}
+  - component: {fileID: 4593252409302701106}
+  - component: {fileID: 1904718129229140273}
+>>>>>>> development
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -18,13 +28,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!224 &460051301738147364
+=======
+--- !u!224 &5959550605196924831
+>>>>>>> development
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 460051301738147369}
+=======
+  m_GameObject: {fileID: 6671270027262926194}
+>>>>>>> development
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,26 +50,45 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &460051301738147367
+=======
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4593252409302701106
+>>>>>>> development
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 460051301738147369}
   m_CullTransparentMesh: 0
 --- !u!114 &460051301738147366
+=======
+  m_GameObject: {fileID: 6671270027262926194}
+  m_CullTransparentMesh: 0
+--- !u!114 &1904718129229140273
+>>>>>>> development
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 460051301738147369}
+=======
+  m_GameObject: {fileID: 6671270027262926194}
+>>>>>>> development
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -133,7 +170,11 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
+<<<<<<< HEAD
     textComponent: {fileID: 460051301738147366}
+=======
+    textComponent: {fileID: 1904718129229140273}
+>>>>>>> development
     characterCount: 8
     spriteCount: 0
     spaceCount: 1
@@ -147,7 +188,11 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
+<<<<<<< HEAD
   m_inputSource: 0
+=======
+  m_inputSource: 3
+>>>>>>> development
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
