@@ -38,7 +38,7 @@ public class SocketListener
         {
             
            // var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = "googleaidb";
+            //dbCon.DatabaseName = "googleaidb";
 
 
             // Create a Socket that will use Tcp protocol      
@@ -55,7 +55,7 @@ public class SocketListener
           //access database and check if two users have the same value
 
 
-           Console.WriteLine("Waiting for a connection from client");
+          // Console.WriteLine("Waiting for a connection from client");
             Socket handler = listener.Accept();
 
             // Incoming data from the client. aka other player    
@@ -63,7 +63,7 @@ public class SocketListener
             byte[] bytes = null;
 
 
-            Console.WriteLine("entrance of true statement");
+            //Console.WriteLine("entrance of true statement");
 
                 bytes = new byte[1024];
                 int bytesRec = handler.Receive(bytes);
@@ -71,7 +71,7 @@ public class SocketListener
 
 
 
-            Console.WriteLine("outisde of true statement");
+           // Console.WriteLine("outisde of true statement");
             //data is the message that is sended, will need to keep track with bytesRec: which the client recieves in the client.cs file
 
             Console.WriteLine("Text received : {0}, from client", data);
