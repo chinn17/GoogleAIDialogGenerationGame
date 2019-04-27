@@ -4,9 +4,11 @@ using System.Net.Sockets;
 using System.Text;
 //using UnityEngine.UI;
 
+
 // Client app is the one sending messages to a Server/listener.   
 // Both listener and client can send messages back and forth once a   
 // communication is established.  
+
 
 
 public class SocketClient
@@ -19,16 +21,23 @@ public class SocketClient
             return 0;
         }
 
+    public static bool isConnected()
+    {
+        return true;//return true once the client recieves a message from the listener
+    }
 
-        public static void StartClient()
-        {
-            byte[] bytes = new byte[1024];
 
-            
+    public static void StartClient()
+    {
+        byte[] bytes = new byte[1024];
+
+    
+       // var vc = new VerifyingConnection();
+
 
             try
             {
-                //object test2 = new VerifyingConnection();
+            //var test2 = new VerifyingConnection();
                 //VerifyingConnection vc = GetCompoment
 
                 //new verifyingConnection instance to call from client once the client has connected
@@ -75,12 +84,14 @@ public class SocketClient
 
                     // Receive the response from the remote device.    
                     int bytesRec = sender.Receive(bytes);
+                    
 
                     Console.WriteLine("Echoed test = {0}, from listener",
                         Encoding.ASCII.GetString(bytes, 0, bytesRec));
+                isConnected();
 
                     // VerifyingConnection.
-                  // test2.testingScriptAccess();
+                   //test2.testingScriptAccess();
                    
 
 

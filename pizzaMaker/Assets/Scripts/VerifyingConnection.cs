@@ -10,20 +10,17 @@ public class VerifyingConnection : MonoBehaviour
     //attached to join button in Join submenu
 {
     //public var Client = SocketClient();
-
+    SocketClient client = new SocketClient();
 
     //1.encapsulating field and using property- will update usages of that field to use the new properties that it creates
 
     //2.encapsulate field but still use field-doesnt change existing usages of the field elsewhere in the code
     //2nd option picked
 
-   public void testingScriptAccess()
+    public static void testClientConnection()
     {
-
-        Console.WriteLine("client has invoked the verifyingConnection class");
+        Console.WriteLine("Client connecting to other scripts");
     }
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -39,16 +36,24 @@ public class VerifyingConnection : MonoBehaviour
 
         int firstPlayer = random.Next(1,3);
         int secondPlayer = random.Next(1, 3);
+        //random number generator for who starts where
+        //1 is pizzamakerUI and 2 is customerUI
 
-        
+
 
         if (dbCon.IsConnect() == true)//DatabaseConnection true
         {
 
-            if (dbP)//if dbP.emailInputField is true, then 
-            {
+            //            if (client.isConnected() == true && listener.isConnected() == true )//if dbP.emailInputField is true, then 
+            //            {
+            //              transition scenes once the check for the listener is true
+            //              if(firstPlayer == 1){//then firstplayer goes to customerUI
+            //                  SceneTransition to pizzaMakerUI for firstplayer
+            //                  scene transition to customerUI for secondplayer
+            //                    }
+//            }
+            
 
-            }
             if (firstPlayer == 1 && secondPlayer != 1)//they go first
             {
                 SceneManager.LoadScene(sceneName: "PizzaMakerUI");

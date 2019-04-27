@@ -22,7 +22,10 @@ public class SocketListener
         StartServer();
         return 0;
     }
-
+    public static bool isConnected()
+    {
+        return true;
+    }
 
     public static void StartServer()
     {
@@ -78,6 +81,9 @@ public class SocketListener
 
             byte[] msg = Encoding.ASCII.GetBytes(data);
             handler.Send(msg);
+
+
+
             handler.Shutdown(SocketShutdown.Both);
             handler.Close();
             //shut down handler
