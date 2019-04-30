@@ -5,32 +5,28 @@ using TMPro;
 
 public class CustomerGameplay : MonoBehaviour
 {
-    TextMeshProUGUI scoreText;
-    TextMeshProUGUI totalText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI totalText;
+    GameObject cartItem;
     string score;
 
     // Start is called before the first frame update
     void Awake()
     {
-        scoreText = GetComponent<TextMeshProUGUI>();
-        score = "0";
+        cartItem = GameObject.Find("Cart Item 1");
+        score = totalText.text;
     }
 
     private void Start()
     {
     }
 
-    public void GetTotal()
-    {
-        totalText = GetComponent<TextMeshProUGUI>();
-        score = totalText.text;
-        Debug.Log(score);
-    }
-
     public void UpdateScore()
     {
-        //scoreText.text = "Score : " + score;
-        //Debug.Log(score);
+        scoreText.text = "Score : " + score;
+        cartItem.SetActive(false);
+        totalText.text = "0";
+        Debug.Log(score);
     }
 
     // Update is called once per frame
