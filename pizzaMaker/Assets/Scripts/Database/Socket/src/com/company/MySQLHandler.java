@@ -3,7 +3,6 @@ package com.company;
 
 import java.sql.*;
 
-
 public class MySQLHandler {
 
     Connection connection = null;
@@ -22,7 +21,7 @@ public class MySQLHandler {
 
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -70,7 +69,7 @@ public class MySQLHandler {
     }
 
     //returns player object
-    public Boolean login(String username, String password) {
+    public String login(String username, String password) {
 
         //hashes provided password to compare to hashed passwords in database
         String hashed_password = Security.getHashedPassword(username, password);
@@ -86,24 +85,15 @@ public class MySQLHandler {
             //if query returned results
             if (rs.next()) {
                 int user_id = rs.getInt("user_id");
-
-                String session_id = Security.generateSessionID();
-
-                //insert session id into the database
-                boolean insert_session_id = insertSessionID(user_id, session_id);
-
-                //if succeeded in adding session_id to database
-                if (insert_session_id) {
-                    //creates new player object for newly logged in player
-                    return true;
-                }
+                //creates new player object for newly logged in player
+                return "Success";
             } else
                 System.out.println("No results");
 
         } catch (Exception ex) {
-            return false;
+            return ex.getMessage();
         }
-        return false;
+        return "Error";
     }
 
     //logs user out by removing their session ID, and removing them from active games
@@ -132,7 +122,7 @@ public class MySQLHandler {
     }
 
     //returns boolean whether registration was successful
-    public String register(String username, String email, String password) {
+    public String register(String username, String password, String email) {
         //hashes provided password to compare to hashed passwords in database
         String hashed_password = Security.getHashedPassword(username, password);
 

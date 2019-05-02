@@ -23,25 +23,7 @@ public class DatabaseProtocol : MonoBehaviour
 
         if (password != null)
         {
-            //if (AccountExists(username, email))
-            //{
-            //    Debug.Log("Account Exists");
-            //    return;
-            //}
-            //var dbCon = DBConnection.Instance();
-            //dbCon.DatabaseName = "googleaidb";
-            //if (dbCon.IsConnect())
-            //{
-            //    MySqlCommand cmd = new MySqlCommand("INSERT INTO `users` (username, email, password) VALUES (?username, ?email, ?password)", dbCon.Connection);
-            //    cmd.Parameters.AddWithValue("?username", username);
-            //    cmd.Parameters.AddWithValue("?email", email);
-            //    cmd.Parameters.AddWithValue("?password", SaltAndHash.Hash(password));
-            //    var reader = cmd.ExecuteReader();
-            //    dbCon.Close();
-            //    SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
-            //}
-
-            string toSend = "register/%username=" + username + "%password=" + password + "%email=" + password + "%";
+            string toSend = "register/%username=" + username + "%password=" + password + "%email=" + email + "%";
 
             IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse(Constant.Server), 4343);
 
