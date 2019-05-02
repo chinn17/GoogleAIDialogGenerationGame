@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-public class DBConnection : MonoBehaviour
+public class DBConnection
 {
     private DBConnection()
     {

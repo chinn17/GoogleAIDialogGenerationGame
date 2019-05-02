@@ -1,5 +1,8 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Assets.Scripts;
+using MySql.Data.MySqlClient;
 using System;
+using System.Net;
+using System.Net.Sockets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,23 +23,38 @@ public class DatabaseProtocol : MonoBehaviour
 
         if (password != null)
         {
-            if (AccountExists(username, email))
+            string toSend = "register/%username=" + username + "%password=" + password + "%email=" + email + "%";
+
+            IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse(Constant.Server), 4343);
+
+            Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            clientSocket.Connect(serverAddress);
+
+            // Sending
+            int toSendLen = System.Text.Encoding.ASCII.GetByteCount(toSend);
+            byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(toSend);
+            byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);
+            clientSocket.Send(toSendLenBytes);
+            clientSocket.Send(toSendBytes);
+
+            // Receiving
+            byte[] rcvLenBytes = new byte[4];
+            clientSocket.Receive(rcvLenBytes);
+            int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
+            byte[] rcvBytes = new byte[rcvLen];
+            clientSocket.Receive(rcvBytes);
+            string rcv = System.Text.Encoding.ASCII.GetString(rcvBytes);
+
+            Debug.Log("Client received: " + rcv);
+            if (rcv == "Success")
             {
-                Debug.Log("Account Exists");
-                return;
-            }
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = "googleaidb";
-            if (dbCon.IsConnect())
-            {
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO `users` (username, email, password) VALUES (?username, ?email, ?password)", dbCon.Connection);
-                cmd.Parameters.AddWithValue("?username", username);
-                cmd.Parameters.AddWithValue("?email", email);
-                cmd.Parameters.AddWithValue("?password", SaltAndHash.Hash(password));
-                var reader = cmd.ExecuteReader();
-                dbCon.Close();
                 SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
             }
+            else
+            {
+                Debug.Log(rcv);
+            }
+            clientSocket.Close();
         }
         else
         {
@@ -69,26 +87,38 @@ public class DatabaseProtocol : MonoBehaviour
         string password = (passwordInputField.text.Length > 0) ? passwordInputField.text : null;
         if (password != null)
         {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = "googleaidb";
-            if (dbCon.IsConnect())
-            {
-                MySqlCommand cmd = new MySqlCommand("SELECT `password` from `users` WHERE `username` = ?username LIMIT 1", dbCon.Connection);
-                cmd.Parameters.AddWithValue("?username", username);
-                string hashedPassword = Convert.ToString(cmd.ExecuteScalar());
-                if (SaltAndHash.Verify(password, hashedPassword))
-                {
-                    PlayerPrefs.SetString("Username", username);
-                    SetOnline(username);
-                    SceneManager.LoadScene("GameMenuScene", LoadSceneMode.Single);
-                }
-                else
-                {
-                    Debug.Log("Incorrect Username or Password");
-                }
+            string toSend = "login/%username=" + username + "%password=" + password + "%";
 
+            IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse(Constant.Server), 4343);
+
+            Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            clientSocket.Connect(serverAddress);
+
+            // Sending
+            int toSendLen = System.Text.Encoding.ASCII.GetByteCount(toSend);
+            byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(toSend);
+            byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);
+            clientSocket.Send(toSendLenBytes);
+            clientSocket.Send(toSendBytes);
+
+            // Receiving
+            byte[] rcvLenBytes = new byte[4];
+            clientSocket.Receive(rcvLenBytes);
+            int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
+            byte[] rcvBytes = new byte[rcvLen];
+            clientSocket.Receive(rcvBytes);
+            string rcv = System.Text.Encoding.ASCII.GetString(rcvBytes);
+
+            Debug.Log("Client received: " + rcv);
+            if (rcv == "Success")
+            {
+                SceneManager.LoadScene("GameMenuScene", LoadSceneMode.Single);
             }
-            dbCon.Close();
+            else
+            {
+                Debug.Log(rcv);
+            }
+            clientSocket.Close();
         }
         else
         {
