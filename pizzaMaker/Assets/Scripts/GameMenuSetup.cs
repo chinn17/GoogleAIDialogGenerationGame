@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -39,7 +40,7 @@ public class GameMenuSetup : MonoBehaviour
     {
         string toSend = "register/%username=test%password=test%email=test@test.com%";
 
-        IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 4343);
+        IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse(Constant.Server), 4343);
 
         Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         clientSocket.Connect(serverAddress);

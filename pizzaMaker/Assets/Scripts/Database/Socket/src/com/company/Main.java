@@ -14,6 +14,7 @@ public class Main {
         MySQLHandler sql_handler = new MySQLHandler();
         System.out.println("Server started");
         String toSend = "Empty";
+
         while (true) {
             Socket socket = serverSocket.accept();
             InputStream is = socket.getInputStream();
@@ -34,6 +35,8 @@ public class Main {
             String[] parameters = received.split("/")[1].split("%");
             switch (action) {
                 case "login":
+//                    toSend = sql_handler.login(parameters[1].split("=")[1], parameters[2].split("=")[1]);
+
                     break;
                 case "register":
                     toSend = sql_handler.register(parameters[1].split("=")[1], parameters[2].split("=")[1], parameters[3].split("=")[1]);
