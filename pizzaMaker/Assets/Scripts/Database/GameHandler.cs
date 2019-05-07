@@ -16,6 +16,19 @@ public class GameHandler : MonoBehaviour
 
     public ProgressBar profitBar;
 
+
+    public Sprite menuItem1;
+    public Sprite menuItem2;
+    public Sprite menuItem3;
+    public Sprite menuItem4;
+    public Sprite menuItem5;
+    public Sprite menuItem6;
+    public Sprite menuItem7;
+    public Sprite menuItem8;
+    public Sprite menuItem9;
+    public Sprite menuItem10;
+    public Sprite emptyPizzaImage;
+
     public Button sendMessageButton;
     public Button addItemButton1;
     public Button addItemButton2;
@@ -27,6 +40,39 @@ public class GameHandler : MonoBehaviour
     public Button addItemButton8;
     public Button addItemButton9;
     public Button addItemButton10;
+
+    public Image cartItemImage1;
+    public Image cartItemImage2;
+    public Image cartItemImage3;
+    public Image cartItemImage4;
+    public Image cartItemImage5;
+    public Image cartItemImage6;
+    public Image cartItemImage7;
+    public Image cartItemImage8;
+    public Image cartItemImage9;
+    public Image cartItemImage10;
+
+    public TextMeshProUGUI cartItemPrice1;
+    public TextMeshProUGUI cartItemPrice2;
+    public TextMeshProUGUI cartItemPrice3;
+    public TextMeshProUGUI cartItemPrice4;
+    public TextMeshProUGUI cartItemPrice5;
+    public TextMeshProUGUI cartItemPrice6;
+    public TextMeshProUGUI cartItemPrice7;
+    public TextMeshProUGUI cartItemPrice8;
+    public TextMeshProUGUI cartItemPrice9;
+    public TextMeshProUGUI cartItemPrice10;
+
+    public TextMeshProUGUI cartItemName1;
+    public TextMeshProUGUI cartItemName2;
+    public TextMeshProUGUI cartItemName3;
+    public TextMeshProUGUI cartItemName4;
+    public TextMeshProUGUI cartItemName5;
+
+    public TextMeshProUGUI totalPriceLabel;
+
+    int cartTotalNumber = 0;
+
 
     List<Message> chatMessages = new List<Message>();
     int maxMessages = 25;
@@ -45,16 +91,16 @@ public class GameHandler : MonoBehaviour
     {
         con_man = main.GetComponent<ConnectionManager>();
         sendMessageButton.onClick.AddListener(sendMessage);
-        addItemButton1.onClick.AddListener(delegate { addToCart("pizza1"); });
-        addItemButton2.onClick.AddListener(delegate { addToCart("pizza2"); });
-        addItemButton3.onClick.AddListener(delegate { addToCart("pizza3"); });
-        addItemButton4.onClick.AddListener(delegate { addToCart("pizza4"); });
-        addItemButton5.onClick.AddListener(delegate { addToCart("pizza5"); });
-        addItemButton6.onClick.AddListener(delegate { addToCart("pizza6"); });
-        addItemButton7.onClick.AddListener(delegate { addToCart("pizza7"); });
-        addItemButton8.onClick.AddListener(delegate { addToCart("pizza8"); });
-        addItemButton9.onClick.AddListener(delegate { addToCart("pizza9"); });
-        addItemButton10.onClick.AddListener(delegate { addToCart("pizza10"); });
+        addItemButton1.onClick.AddListener(delegate { addToCustomerCart("pizza1"); });
+        addItemButton2.onClick.AddListener(delegate { addToCustomerCart("pizza2"); });
+        addItemButton3.onClick.AddListener(delegate { addToCustomerCart("pizza3"); });
+        addItemButton4.onClick.AddListener(delegate { addToCustomerCart("pizza4"); });
+        addItemButton5.onClick.AddListener(delegate { addToCustomerCart("pizza5"); });
+        addItemButton6.onClick.AddListener(delegate { addToCustomerCart("pizza6"); });
+        addItemButton7.onClick.AddListener(delegate { addToCustomerCart("pizza7"); });
+        addItemButton8.onClick.AddListener(delegate { addToCustomerCart("pizza8"); });
+        addItemButton9.onClick.AddListener(delegate { addToCustomerCart("pizza9"); });
+        addItemButton10.onClick.AddListener(delegate { addToCustomerCart("pizza10"); });
     }
 
     private void Update()
@@ -119,10 +165,69 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    public void addToCart(string itemName)
+    public void addToCustomerCart(string itemName)
     {
+     
         con_man.send("/addToCart?itemName=" + itemName, Constants.response_addToCart, ResponseCart);
+        addToMakerCart(itemName);
     }
+
+
+    public void addToMakerCart(string itemName)
+    {
+
+        int pizzaNumber = 0;
+
+        string[] pizzaNameList = { "pizza1", "pizza2", "pizza3", "pizza4", "pizza5", "pizza6", "pizza7", "pizza8", "pizza9", "pizza10" };
+        int[] pizzaPriceList = { 12, 6, 19, 13, 8, 20, 22, 24, 60 };
+        Sprite[] pizzaImages = { menuItem1, menuItem2, menuItem3, menuItem4, menuItem5, menuItem6, menuItem7, menuItem8, menuItem9, menuItem10 };
+
+
+        for (int i = 0; i < pizzaNameList.Length; i++)
+        {
+            if (itemName == pizzaNameList[i])
+            {
+                pizzaNumber = i;
+                break;
+            }
+        }
+
+
+        if (cartItemImage1.sprite.name == "empty_pizza")
+        {
+            cartItemImage1.sprite = pizzaImages[pizzaNumber];
+            cartItemPrice1.text = pizzaPriceList[pizzaNumber].ToString();
+          //  cartItemName1.text = itemName;
+            cartTotalNumber += pizzaPriceList[pizzaNumber];
+
+        }
+        else if (cartItemImage2.sprite.name == "empty_pizza")
+        {
+            cartItemImage2.sprite = pizzaImages[pizzaNumber];
+            cartItemPrice2.text = pizzaPriceList[pizzaNumber].ToString();
+          //  cartItemName2.text = itemName;
+            cartTotalNumber += pizzaPriceList[pizzaNumber];
+
+        }
+        else if (cartItemImage3.sprite.name == "empty_pizza")
+        {
+            cartItemImage3.sprite = pizzaImages[pizzaNumber];
+            cartItemPrice3.text = pizzaPriceList[pizzaNumber].ToString();
+         //   cartItemName3.text = itemName;
+            cartTotalNumber += pizzaPriceList[pizzaNumber];
+        }
+        else if (cartItemImage4.sprite.name == "empty_pizza")
+        {
+            cartItemImage4.sprite = pizzaImages[pizzaNumber];
+            cartItemPrice4.text = pizzaPriceList[pizzaNumber].ToString();
+         //   cartItemName4.text = itemName;
+            cartTotalNumber += pizzaPriceList[pizzaNumber];
+        }
+
+        totalPriceLabel.text = cartTotalNumber.ToString();
+
+    }
+
 
 
     public void addMessageToChatbox(string messageText)

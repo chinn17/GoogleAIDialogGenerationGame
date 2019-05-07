@@ -20,17 +20,6 @@ public class CustomerHandler : MonoBehaviour
     public ProgressBar happinessBar;
     public ProgressBar savingsBar;
 
-    public Image cartItemImage1;
-    public Image cartItemImage2;
-    public Image cartItemImage3;
-    public Image cartItemImage4;
-    public Image cartItemImage5;
-    public Image cartItemImage6;
-    public Image cartItemImage7;
-    public Image cartItemImage8;
-    public Image cartItemImage9;
-    public Image cartItemImage10;
-
 
     public Sprite menuItem1;
     public Sprite menuItem2;
@@ -43,6 +32,17 @@ public class CustomerHandler : MonoBehaviour
     public Sprite menuItem9;
     public Sprite menuItem10;
     public Sprite emptyPizzaImage;
+
+    public Image cartItemImage1;
+    public Image cartItemImage2;
+    public Image cartItemImage3;
+    public Image cartItemImage4;
+    public Image cartItemImage5;
+    public Image cartItemImage6;
+    public Image cartItemImage7;
+    public Image cartItemImage8;
+    public Image cartItemImage9;
+    public Image cartItemImage10;
 
     public TextMeshProUGUI cartItemPrice1;
     public TextMeshProUGUI cartItemPrice2;
