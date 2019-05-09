@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99c50847-8c00-49e0-8e52-bb48265f58c7" name="Default Changelist" comment="" />
+    <list default="true" id="99c50847-8c00-49e0-8e52-bb48265f58c7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../Scenes/CustomerUI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scenes/CustomerUI.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scenes/PizzaMakerUI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scenes/PizzaMakerUI.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CustomerHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CustomerHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/GameServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/Managed/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/Managed/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/Managed/Unity.Analytics.DataPrivacy.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/Managed/Unity.Analytics.DataPrivacy.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/Managed/Unity.TextMeshPro.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/Managed/Unity.TextMeshPro.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/globalgamemanagers" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/globalgamemanagers" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/globalgamemanagers.assets" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/globalgamemanagers.assets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/level8" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/level8" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/level9" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../TestBuild2.app/Contents/Resources/Data/level9" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/GameServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3037">
-              <caret line="202" column="35" lean-forward="true" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="35" />
+            <state relative-caret-position="315">
+              <caret line="211" lean-forward="true" selection-start-line="211" selection-end-line="211" />
             </state>
           </provider>
         </entry>
@@ -173,7 +186,7 @@
     <frame x="40" y="43" width="1400" height="776" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2533137" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2533137" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -182,7 +195,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32894737" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32894737" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -211,8 +224,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/GameServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3037">
-          <caret line="202" column="35" lean-forward="true" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="35" />
+        <state relative-caret-position="315">
+          <caret line="211" lean-forward="true" selection-start-line="211" selection-end-line="211" />
         </state>
       </provider>
     </entry>

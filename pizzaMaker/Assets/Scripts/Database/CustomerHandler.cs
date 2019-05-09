@@ -67,9 +67,12 @@ public class CustomerHandler : MonoBehaviour
     public TextMeshProUGUI cartItemName10;
 
     public TextMeshProUGUI totalPriceLabel;
+    public TextMeshProUGUI budgetLabel;
 
     int cartTotalNumber = 0;
 
+    int[] cartHappinessScores = { 0, 0, 0, 0 };
+    int[] pizzaHappinessScores = { 5, 6, 7, 8, 2, 3, 7, 8, 19, 25 };
 
 
     List<Message> chatMessages = new List<Message>();
@@ -131,9 +134,67 @@ public class CustomerHandler : MonoBehaviour
 
         }
 
+
         if (protocol == "103")
         {
             addMessageToChatbox(response.response);
+        }
+
+        if (protocol == "107")
+        {
+
+            Debug.Log("APPLYING DISCOUNT HERE : "+ response.response);
+            int discountPercentage = Int32.Parse(response.response.Substring(0, 2));
+            string cartItemNumber = response.response.Substring(2);
+            int difference = 0;
+
+            if (cartItemNumber == "1")
+            {
+                int priceOfItem = Int32.Parse(cartItemPrice1.text);
+
+                cartItemPrice1.text = (priceOfItem - ((priceOfItem * discountPercentage) / 100)).ToString();
+                difference = ((priceOfItem * discountPercentage) / 100);
+
+
+            }
+           else if (cartItemNumber == "2")
+            {
+                int priceOfItem = Int32.Parse(cartItemPrice1.text);
+
+                cartItemPrice2.text = (priceOfItem - ((priceOfItem * discountPercentage) / 100)).ToString();
+                difference = ((priceOfItem * discountPercentage) / 100);
+
+
+            }
+            else if (cartItemNumber == "3")
+            {
+                int priceOfItem = Int32.Parse(cartItemPrice1.text);
+
+                cartItemPrice3.text = (priceOfItem - ((priceOfItem * discountPercentage) / 100)).ToString();
+                difference = ((priceOfItem * discountPercentage) / 100);
+
+            }
+            else if (cartItemNumber == "4")
+            {
+                int priceOfItem = Int32.Parse(cartItemPrice1.text);
+
+                cartItemPrice4.text = (priceOfItem - ((priceOfItem * discountPercentage) / 100)).ToString();
+                difference = ((priceOfItem * discountPercentage) / 100);
+
+            }
+            else if (cartItemNumber == "5")
+            {
+                int priceOfItem = Int32.Parse(cartItemPrice1.text);
+
+                cartItemPrice5.text = (priceOfItem - ((priceOfItem * discountPercentage) / 100)).ToString();
+                difference = ((priceOfItem * discountPercentage) / 100);
+
+            }
+
+
+            cartTotalNumber = cartTotalNumber - difference;
+            totalPriceLabel.text = cartTotalNumber.ToString();
+
         }
 
 
@@ -147,7 +208,7 @@ public class CustomerHandler : MonoBehaviour
         int pizzaNumber = 0;
 
         string[] pizzaNameList = { "pizza1", "pizza2", "pizza3", "pizza4", "pizza5", "pizza6", "pizza7", "pizza8", "pizza9", "pizza10" };
-        int[] pizzaPriceList = { 12, 6, 19, 13, 8, 20, 22, 24, 60 }; 
+        int[] pizzaPriceList = { 12, 6, 19, 13, 8, 20, 22, 24, 23, 14 }; 
         Sprite[] pizzaImages = { menuItem1, menuItem2, menuItem3, menuItem4, menuItem5, menuItem6, menuItem7, menuItem8, menuItem9, menuItem10 };
 
 
@@ -161,12 +222,14 @@ public class CustomerHandler : MonoBehaviour
         }
 
 
+
         if (cartItemImage1.sprite.name == "empty_pizza")
         {
             cartItemImage1.sprite = pizzaImages[pizzaNumber];
             cartItemPrice1.text = pizzaPriceList[pizzaNumber].ToString();
             cartItemName1.text = itemName;
             cartTotalNumber += pizzaPriceList[pizzaNumber];
+            cartHappinessScores[0] = pizzaHappinessScores[pizzaNumber];
 
         }
         else if (cartItemImage2.sprite.name == "empty_pizza")
@@ -175,6 +238,7 @@ public class CustomerHandler : MonoBehaviour
             cartItemPrice2.text = pizzaPriceList[pizzaNumber].ToString();
             cartItemName2.text = itemName;
             cartTotalNumber += pizzaPriceList[pizzaNumber];
+            cartHappinessScores[1] = pizzaHappinessScores[pizzaNumber];
 
         }
         else if (cartItemImage3.sprite.name == "empty_pizza")
@@ -183,6 +247,7 @@ public class CustomerHandler : MonoBehaviour
             cartItemPrice3.text = pizzaPriceList[pizzaNumber].ToString();
             cartItemName3.text = itemName;
             cartTotalNumber += pizzaPriceList[pizzaNumber];
+            cartHappinessScores[2] = pizzaHappinessScores[pizzaNumber];
         }
         else if (cartItemImage4.sprite.name == "empty_pizza")
         {
@@ -190,6 +255,7 @@ public class CustomerHandler : MonoBehaviour
             cartItemPrice4.text = pizzaPriceList[pizzaNumber].ToString();
             cartItemName4.text = itemName;
             cartTotalNumber += pizzaPriceList[pizzaNumber];
+            cartHappinessScores[3] = pizzaHappinessScores[pizzaNumber];
         }
 
         totalPriceLabel.text = cartTotalNumber.ToString();
@@ -230,19 +296,63 @@ public class CustomerHandler : MonoBehaviour
 
     public void payPressed()
     {
+
+        //Send request to Maker
+        con_man.send("/pay", Constants.response_pay, ResponsePay);
+
+
         //Calculate scores
-        happinessBar.BarValue += 10;
+        foreach (int itemScore in cartHappinessScores) 
+        {
+            happinessBar.BarValue += itemScore;
+        }
+
 
         int totalAmount = Int32.Parse(totalPriceLabel.text);
         savingsBar.BarValue -= totalAmount;
 
-        //Send request to Maker
-        con_man.send("/pay", Constants.response_pay, ResponsePay);
+        //Reduce from budget
+        int budget = Int32.Parse(budgetLabel.text);
+        budget -= totalAmount;
+        budgetLabel.text = budget.ToString();
+
+        //Clear cart
+
+
+
+
+        clearCart();
+    }
+
+
+    public void clearCart()
+    {
+        cartItemName1.text = "";
+        cartItemName2.text = "";
+        cartItemName3.text = "";
+        cartItemName4.text = "";
+
+        cartItemImage1.sprite = emptyPizzaImage;
+        cartItemImage2.sprite = emptyPizzaImage;
+        cartItemImage3.sprite = emptyPizzaImage;
+        cartItemImage4.sprite = emptyPizzaImage;
+
+        cartItemPrice1.text = "0";
+        cartItemPrice2.text = "0";
+        cartItemPrice3.text = "0";
+        cartItemPrice4.text = "0";
+
+        totalPriceLabel.text = "0";
+        cartTotalNumber = 0;
+
+        for (int i = 0; i < 4; i++) {
+            cartHappinessScores[i] = 0;
+        }
     }
 
     public IEnumerator ResponsePay(Response response)
     {
-        Debug.Log("Timer Response");
+
 
         yield return 0;
     }

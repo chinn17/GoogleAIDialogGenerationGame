@@ -71,7 +71,7 @@ public class GameHandler : MonoBehaviour
 
     public TextMeshProUGUI totalPriceLabel;
 
-    int cartTotalNumber = 0;
+    public static int cartTotalNumber = 0;
 
 
     List<Message> chatMessages = new List<Message>();
@@ -145,7 +145,32 @@ public class GameHandler : MonoBehaviour
     {
         //Calculate score
         profitBar.BarValue += 10;
+
+        clearCart();
     }
+
+    public void clearCart()
+    {
+        cartItemName1.text = "";
+        cartItemName2.text = "";
+        cartItemName3.text = "";
+        cartItemName4.text = "";
+
+        cartItemImage1.sprite = emptyPizzaImage;
+        cartItemImage2.sprite = emptyPizzaImage;
+        cartItemImage3.sprite = emptyPizzaImage;
+        cartItemImage4.sprite = emptyPizzaImage;
+
+        cartItemPrice1.text = "0";
+        cartItemPrice2.text = "0";
+        cartItemPrice3.text = "0";
+        cartItemPrice4.text = "0";
+
+        totalPriceLabel.text = "0";
+        cartTotalNumber = 0;
+
+    }
+
 
     public void sendMessage()
     {

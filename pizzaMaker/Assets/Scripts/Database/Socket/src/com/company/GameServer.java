@@ -206,6 +206,7 @@
 
         public String applyDiscount (String discount, String cartItemNumber) {
 
+            responseList2.add("107"+discount+cartItemNumber);
             return "Applying Discount";
         }
 
