@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class countdown : MonoBehaviour
 {
     public TextMeshProUGUI timer;
-    float totalTime = 300f; //2 minutes
+    float totalTime = 30f; //2 minutes
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,12 @@ public class countdown : MonoBehaviour
         {
             UpdateLevelTimer(totalTime);
         }
+        else
+        {
+            SceneManager.LoadScene("PlayerWonScene", LoadSceneMode.Single);
+        }
+
+
     }
 
     public void UpdateLevelTimer(float totalSeconds)

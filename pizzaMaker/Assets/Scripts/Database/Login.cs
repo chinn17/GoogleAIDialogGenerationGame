@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -31,7 +32,12 @@ public class Login : MonoBehaviour
         //string timer = "123";
         //string toSend = "gameTimer/%timer=" + timer;
         //con_man.send(toSend, Constants.response_gametimer, ResponseTimer);
-        con_man.send("/login?username=" + username + "&password=" + password, Constants.response_login, ResponseLogin);
+        try
+        {
+            con_man.send("/login?username=" + username + "&password=" + password, Constants.response_login, ResponseLogin);
+        } catch(Exception e){
+            Debug.Log("Login error: " + e);
+        }
 
     }
 

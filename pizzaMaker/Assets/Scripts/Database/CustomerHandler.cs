@@ -310,6 +310,9 @@ public class CustomerHandler : MonoBehaviour
         int totalAmount = Int32.Parse(totalPriceLabel.text);
         savingsBar.BarValue -= totalAmount;
 
+
+
+
         //Reduce from budget
         int budget = Int32.Parse(budgetLabel.text);
         budget -= totalAmount;
@@ -321,6 +324,9 @@ public class CustomerHandler : MonoBehaviour
 
 
         clearCart();
+
+        UpdateTotalScore.happinessScore = (int)happinessBar.BarValue;
+        UpdateTotalScore.savingsScore = (int)savingsBar.BarValue;
     }
 
 

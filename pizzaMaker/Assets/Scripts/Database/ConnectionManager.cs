@@ -53,7 +53,9 @@ public class ConnectionManager : MonoBehaviour
         try
         {
             //Debug.Log("Setting up new socket");
+
             TcpClient mySocket = new TcpClient(Constants.REMOTE_HOST, Constants.REMOTE_PORT);
+            Debug.Log("ADDING SOCKET");
             sockets.Add(mySocket);
 
             //NetworkStream stream = mySocket.GetStream();

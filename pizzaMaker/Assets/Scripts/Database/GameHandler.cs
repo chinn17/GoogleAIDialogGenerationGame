@@ -76,7 +76,10 @@ public class GameHandler : MonoBehaviour
 
     List<Message> chatMessages = new List<Message>();
     int maxMessages = 25;
-   
+
+    int[] cartProfitScores = { 0, 0, 0, 0 };
+    int[] pizzaProfitScores = { 5, 6, 7, 8, 2, 3, 7, 8, 19, 25 };
+
 
 
     int frame_counter = 0;
@@ -144,9 +147,16 @@ public class GameHandler : MonoBehaviour
     public void updateScore()
     {
         //Calculate score
-        profitBar.BarValue += 10;
+        foreach (int itemScore in cartProfitScores)
+        {
+            profitBar.BarValue += itemScore;
+        }
+
+
 
         clearCart();
+
+        UpdateTotalScore.profitScore = (int)profitBar.BarValue;
     }
 
     public void clearCart()
@@ -225,6 +235,7 @@ public class GameHandler : MonoBehaviour
             cartItemPrice1.text = pizzaPriceList[pizzaNumber].ToString();
           //  cartItemName1.text = itemName;
             cartTotalNumber += pizzaPriceList[pizzaNumber];
+            cartProfitScores[0] = pizzaProfitScores[pizzaNumber];
 
         }
         else if (cartItemImage2.sprite.name == "empty_pizza")
@@ -233,7 +244,7 @@ public class GameHandler : MonoBehaviour
             cartItemPrice2.text = pizzaPriceList[pizzaNumber].ToString();
           //  cartItemName2.text = itemName;
             cartTotalNumber += pizzaPriceList[pizzaNumber];
-
+            cartProfitScores[1] = pizzaProfitScores[pizzaNumber];
         }
         else if (cartItemImage3.sprite.name == "empty_pizza")
         {
@@ -241,6 +252,7 @@ public class GameHandler : MonoBehaviour
             cartItemPrice3.text = pizzaPriceList[pizzaNumber].ToString();
          //   cartItemName3.text = itemName;
             cartTotalNumber += pizzaPriceList[pizzaNumber];
+            cartProfitScores[2] = pizzaProfitScores[pizzaNumber];
         }
         else if (cartItemImage4.sprite.name == "empty_pizza")
         {
@@ -248,6 +260,7 @@ public class GameHandler : MonoBehaviour
             cartItemPrice4.text = pizzaPriceList[pizzaNumber].ToString();
          //   cartItemName4.text = itemName;
             cartTotalNumber += pizzaPriceList[pizzaNumber];
+            cartProfitScores[3] = pizzaProfitScores[pizzaNumber];
         }
 
         totalPriceLabel.text = cartTotalNumber.ToString();
