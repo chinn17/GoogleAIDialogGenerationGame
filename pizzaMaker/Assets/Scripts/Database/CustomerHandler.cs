@@ -114,8 +114,7 @@ public class CustomerHandler : MonoBehaviour
     }
 
     public void requestHeartbeat()
-    {
-        Debug.Log(this.playerId);
+    {       
         string playerId = this.playerId;
         con_man.send("/heartbeat?playerId=" + playerId, Constants.response_heartbeat, ResponseHeartbeat);
     }

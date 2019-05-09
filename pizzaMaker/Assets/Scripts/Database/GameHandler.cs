@@ -151,10 +151,11 @@ public class GameHandler : MonoBehaviour
 
     public void clearCart()
     {
-        cartItemName1.text = "";
-        cartItemName2.text = "";
-        cartItemName3.text = "";
-        cartItemName4.text = "";
+        Debug.Log("CLEARING CART FOR MAKER");
+        //cartItemName1.text = "";
+        //cartItemName2.text = "";
+        //cartItemName3.text = "";
+        //cartItemName4.text = "";
 
         cartItemImage1.sprite = emptyPizzaImage;
         cartItemImage2.sprite = emptyPizzaImage;

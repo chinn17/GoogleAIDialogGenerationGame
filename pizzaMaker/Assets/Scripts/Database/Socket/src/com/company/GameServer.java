@@ -61,10 +61,6 @@
                 queryString = endpointParts[1];
             }
 
-            //System.out.println("Endpoint: "+endpoint);
-            //System.out.println("queryString: "+queryString);
-
-
             //response to return to client
             String to_return = "";
 
