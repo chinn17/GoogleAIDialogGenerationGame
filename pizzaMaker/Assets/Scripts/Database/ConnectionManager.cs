@@ -1,13 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
-
-using System;
-using System.IO;
-using System.Net.Sockets;
-using System.Security.Cryptography;
-using System.Text;
 using System.Collections.Generic;
+using System.Net.Sockets;
+using System.Text;
 using System.Threading;
+using UnityEngine;
 
 public class ConnectionManager : MonoBehaviour
 {
@@ -29,7 +26,7 @@ public class ConnectionManager : MonoBehaviour
     //stores callback functions and their corresponding protocols
     private Dictionary<int, Callback> callbacks = new Dictionary<int, Callback>();
 
-    
+
     void Awake()
     {
         //mySocket = null;
@@ -55,17 +52,18 @@ public class ConnectionManager : MonoBehaviour
             //Debug.Log("Setting up new socket");
 
             TcpClient mySocket = new TcpClient(Constants.REMOTE_HOST, Constants.REMOTE_PORT);
-            Debug.Log("ADDING SOCKET");
+            //Debug.Log("ADDING SOCKET");
             sockets.Add(mySocket);
 
             //NetworkStream stream = mySocket.GetStream();
             //streams.Add(stream);
             //readers.Add(new StreamReader(stream));
 
-          //  Debug.Log(getCurrentMilliseconds() + ": Connected size: " + sockets.Count);
+            //  Debug.Log(getCurrentMilliseconds() + ": Connected size: " + sockets.Count);
             return true;
         }
-        catch (Exception e){
+        catch (Exception e)
+        {
             Debug.Log(getCurrentMilliseconds() + ": Socket error: " + e);
         }
 
@@ -93,8 +91,8 @@ public class ConnectionManager : MonoBehaviour
                     //removes last character since it's a newline
                     //removes another last character since it's a nullbyte or some shit
                     reply = reply.Substring(0, reply.Length - 1);
-                  //  Debug.Log(getCurrentMilliseconds() + ": reply: " + reply+"|");
-                    
+                    //  Debug.Log(getCurrentMilliseconds() + ": reply: " + reply+"|");
+
 
 
 
@@ -125,13 +123,14 @@ public class ConnectionManager : MonoBehaviour
                 }
                 else
                     counter++;
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Debug.Log(getCurrentMilliseconds() + ": Trying to close socket: " + ex.ToString());
                 closeSocket(counter);
             }
         }
-        
+
     }
 
     public void closeSocket(int index)
@@ -144,8 +143,9 @@ public class ConnectionManager : MonoBehaviour
         try
         {
             //don't close socket if it's already closed
-            if (sockets[index] != null) { 
-            sockets[index].Close();
+            if (sockets[index] != null)
+            {
+                sockets[index].Close();
             }
 
             //streams[index].Flush();
@@ -154,9 +154,11 @@ public class ConnectionManager : MonoBehaviour
             sockets.RemoveAt(index);
             //streams.RemoveAt(index);
             //readers.RemoveAt(index);
-        } catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             Debug.Log(getCurrentMilliseconds() + ": tried closing socket " + index + " with len " + sockets.Count);
+            Debug.Log(ex.ToString());
         }
     }
 
@@ -206,29 +208,31 @@ public class ConnectionManager : MonoBehaviour
         //gets newly opened network stream
         //NetworkStream stream = streams[streams.Count - 1];
 
-        try { 
+        try
+        {
             NetworkStream stream = sockets[sockets.Count - 1].GetStream();
-        
 
 
 
 
-        //need this so that the server knows when to stop reading from the stream
-        url += "\n";
-        url += null;
-        url += "\n";
 
-      //  Debug.Log(getCurrentMilliseconds()+": To_send: " + url);
+            //need this so that the server knows when to stop reading from the stream
+            url += "\n";
+            url += null;
+            url += "\n";
 
-        // Convert string message to byte array.                 
-        byte[] clientMessageAsByteArray = Encoding.ASCII.GetBytes(url);
-        // Write byte array to socketConnection stream.                 
-        stream.Write(clientMessageAsByteArray, 0, clientMessageAsByteArray.Length);
-        stream.Flush();
+            //  Debug.Log(getCurrentMilliseconds()+": To_send: " + url);
+
+            // Convert string message to byte array.                 
+            byte[] clientMessageAsByteArray = Encoding.ASCII.GetBytes(url);
+            // Write byte array to socketConnection stream.                 
+            stream.Write(clientMessageAsByteArray, 0, clientMessageAsByteArray.Length);
+            stream.Flush();
         }
         catch (Exception ex)
         {
-
+            Debug.Log(ex.ToString());
+            
         }
 
 
