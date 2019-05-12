@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -127,7 +128,7 @@ public class GameHandler : MonoBehaviour
 
     public IEnumerator ResponseHeartbeat(Response response)
     {
-    
+
         string protocol = response.response.Substring(0, 3);
         response.response = response.response.Substring(3);
 
@@ -182,28 +183,46 @@ public class GameHandler : MonoBehaviour
 
     }
 
+    private string[] WhiteList = { "PIZZA", "THANK", "YOU", "PURCHASE", "BUY", "PRICE", "BUDGET", "HELLO", "HI", "I'M", "LOOKING", "PLEASE", "DOLLAR", "COIN", "SECOND" };
+    private string[] Punctuation = { ".", "!", ",", "?", ":", ";", "&" };
 
     public void sendMessage()
     {
         if (messageField.text != "")
         {
-            if (chatMessages.Count >= maxMessages)
+            if (WhiteList.Any(messageField.text.ToUpper().Contains))
             {
-                Destroy(chatMessages[0].textObject.gameObject);
-                chatMessages.Remove(chatMessages[0]);
+                if (Punctuation.Any(messageField.text.EndsWith))
+                {
+                    if (chatMessages.Count >= maxMessages)
+                    {
+                        Destroy(chatMessages[0].textObject.gameObject);
+                        chatMessages.Remove(chatMessages[0]);
+                    }
+
+                    addMessageToChatbox(messageField.text);
+
+
+                    con_man.send("/chat?newMessage=" + messageField.text + "&playerId=player1", Constants.response_chat, ResponseChat);
+                    messageField.text = "";
+                }
+                else
+                {
+                    Debug.Log("Don't forget to punctuate!");
+                }
+
+            }
+            else
+            {
+                Debug.Log("Please use complete sentences");
             }
 
-            addMessageToChatbox(messageField.text);
-
-
-            con_man.send("/chat?newMessage=" + messageField.text + "&playerId=player1", Constants.response_chat, ResponseChat);
-            messageField.text = "";
         }
     }
 
     public void addToCustomerCart(string itemName)
     {
-     
+
         con_man.send("/addToCart?itemName=" + itemName, Constants.response_addToCart, ResponseCart);
         addToMakerCart(itemName);
     }
@@ -233,7 +252,7 @@ public class GameHandler : MonoBehaviour
         {
             cartItemImage1.sprite = pizzaImages[pizzaNumber];
             cartItemPrice1.text = pizzaPriceList[pizzaNumber].ToString();
-          //  cartItemName1.text = itemName;
+            //  cartItemName1.text = itemName;
             cartTotalNumber += pizzaPriceList[pizzaNumber];
             cartProfitScores[0] = pizzaProfitScores[pizzaNumber];
 
@@ -242,7 +261,7 @@ public class GameHandler : MonoBehaviour
         {
             cartItemImage2.sprite = pizzaImages[pizzaNumber];
             cartItemPrice2.text = pizzaPriceList[pizzaNumber].ToString();
-          //  cartItemName2.text = itemName;
+            //  cartItemName2.text = itemName;
             cartTotalNumber += pizzaPriceList[pizzaNumber];
             cartProfitScores[1] = pizzaProfitScores[pizzaNumber];
         }
@@ -250,7 +269,7 @@ public class GameHandler : MonoBehaviour
         {
             cartItemImage3.sprite = pizzaImages[pizzaNumber];
             cartItemPrice3.text = pizzaPriceList[pizzaNumber].ToString();
-         //   cartItemName3.text = itemName;
+            //   cartItemName3.text = itemName;
             cartTotalNumber += pizzaPriceList[pizzaNumber];
             cartProfitScores[2] = pizzaProfitScores[pizzaNumber];
         }
@@ -258,7 +277,7 @@ public class GameHandler : MonoBehaviour
         {
             cartItemImage4.sprite = pizzaImages[pizzaNumber];
             cartItemPrice4.text = pizzaPriceList[pizzaNumber].ToString();
-         //   cartItemName4.text = itemName;
+            //   cartItemName4.text = itemName;
             cartTotalNumber += pizzaPriceList[pizzaNumber];
             cartProfitScores[3] = pizzaProfitScores[pizzaNumber];
         }
@@ -311,7 +330,7 @@ public class GameHandler : MonoBehaviour
 
     public IEnumerator ResponseCart(Response response)
     {
-       // Debug.Log("Cart Response");
+        // Debug.Log("Cart Response");
 
         yield return 0;
     }
