@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 public class countdown : MonoBehaviour
 {
     public TextMeshProUGUI timer;
-    float totalTime = 30f; //2 minutes
+    float totalTime = 120f; //2 minutes
     // Start is called before the first frame update
+    bool firstGame = true;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -23,9 +24,26 @@ public class countdown : MonoBehaviour
         {
             UpdateLevelTimer(totalTime);
         }
+        else if (firstGame)
+        {
+            string currentScene = SceneManager.GetActiveScene().name;
+            if (currentScene == "PizzaMakerUI")
+            {
+                SceneManager.LoadScene("CustomerUI", LoadSceneMode.Single);
+                firstGame = false;
+
+            }
+            else if (currentScene == "CustomerUI")
+            {
+                SceneManager.LoadScene("PizzaMakerUI", LoadSceneMode.Single);
+                firstGame = false;
+
+            }
+        }
         else
         {
             SceneManager.LoadScene("PlayerWonScene", LoadSceneMode.Single);
+
         }
 
 
