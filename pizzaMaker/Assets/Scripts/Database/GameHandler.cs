@@ -187,7 +187,6 @@ public class GameHandler : MonoBehaviour
     }
 
     private string[] WhiteList = { "PIZZA", "THANK", "YOU", "PURCHASE", "BUY", "PRICE", "BUDGET", "HELLO", "HI", "I'M", "LOOKING", "PLEASE", "DOLLAR", "COIN", "SECOND", "YES", "YEAH", "NO", "NOPE", "OKAY", "OK", "SUGGEST", "ADD", "TAKE", "OFF", "DISCOUNT", "DON'T" };
-
     private string[] Punctuation = { ".", "!", ",", "?", ":", ";", "&" };
 
     public void sendMessage()

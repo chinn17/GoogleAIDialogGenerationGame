@@ -211,6 +211,7 @@ public class CustomerHandler : MonoBehaviour
         int pizzaNumber = 0;
 
         string[] pizzaNameList = { "pizza1", "pizza2", "pizza3", "pizza4", "pizza5", "pizza6", "pizza7", "pizza8", "pizza9", "pizza10" };
+        int[] pizzaPriceList = { 13, 15, 10, 12, 11, 13, 14, 12, 14, 13 };
         Sprite[] pizzaImages = { menuItem1, menuItem2, menuItem3, menuItem4, menuItem5, menuItem6, menuItem7, menuItem8, menuItem9, menuItem10 };
 
 
